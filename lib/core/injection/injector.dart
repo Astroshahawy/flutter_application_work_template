@@ -6,15 +6,16 @@ import '../src/app_export.dart';
 
 final getIt = GetIt.instance;
 
-void initGetIt() {
-  /// BLoC
-  getIt.registerFactory<FeatureCubit>(() => FeatureCubit(getIt()));
+void initGetIt() async {
+  ///Essentials
+  getIt.registerFactory<LocalizationBloc>(() => LocalizationBloc());
+  getIt.registerFactory<InternetCubit>(() => InternetCubit());
+  getIt.registerFactory<AppThemeCubit>(() => AppThemeCubit());
 
-  /// Data Sources
+  /// Feature
   getIt.registerLazySingleton<FeatureDataSource>(
       () => FeatureDataSource(getIt()));
-
-  /// Repository
+  getIt.registerFactory<FeatureCubit>(() => FeatureCubit(getIt()));
   getIt.registerLazySingleton<FeatureRepository>(
       () => FeatureRepository(getIt()));
 
@@ -25,6 +26,7 @@ void initGetIt() {
   getIt.registerLazySingletonAsync<SharedPreferences>(
     () async => await SharedPreferences.getInstance(),
   );
+  await getIt.isReady<SharedPreferences>();
 
   /// FlutterSecureStorage
   getIt.registerLazySingleton<FlutterSecureStorage>(

@@ -8,9 +8,14 @@ class LocalizationBloc extends Cubit<LocalizationState> {
   static LocalizationBloc get(context) =>
       BlocProvider.of<LocalizationBloc>(context);
 
+  void setDefaultLanguage() {
+    getIt<SharedPreferences>()
+        .setString('locale', AppLocalization.supportedLocales.first.toString());
+  }
+
   void changeLanguageToArabic() {
     getIt<SharedPreferences>()
-        .setString("locale", AppLocalization.supportedLocales.first.toString());
+        .setString('locale', AppLocalization.supportedLocales.first.toString());
     emit(
       LocalizationChange(
         AppLocalization.supportedLocales.first,
@@ -20,7 +25,7 @@ class LocalizationBloc extends Cubit<LocalizationState> {
 
   void changeLanguageToEnglish() {
     getIt<SharedPreferences>()
-        .setString("locale", AppLocalization.supportedLocales.last.toString());
+        .setString('locale', AppLocalization.supportedLocales.last.toString());
     emit(
       LocalizationChange(
         AppLocalization.supportedLocales.last,

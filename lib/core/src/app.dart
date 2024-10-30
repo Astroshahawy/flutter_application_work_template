@@ -1,5 +1,3 @@
-import 'package:flutter_application_work_template/core/themes/cubit/app_theme_cubit.dart';
-
 import 'app_export.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,9 +14,12 @@ class MyApp extends StatelessWidget {
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => InternetCubit()),
+              BlocProvider<InternetCubit>(
+                  create: (context) => getIt<InternetCubit>()),
               BlocProvider<LocalizationBloc>(
-                  create: (context) => getIt<LocalizationBloc>()),
+                  create: (context) => getIt<LocalizationBloc>()..setDefaultLanguage()),
+              BlocProvider<AppThemeCubit>(
+                  create: (context) => getIt<AppThemeCubit>()),
             ],
             child: BlocBuilder<LocalizationBloc, LocalizationState>(
               buildWhen: (previous, current) => previous != current,
@@ -46,10 +47,11 @@ class MyApp extends StatelessWidget {
                     }
                     return supportedLocales.first;
                   },
-                  locale: getIt<SharedPreferences>().getString("locale") == null
+                  locale: getIt<SharedPreferences>().getString('locale') == null
                       ? localeState.locale
-                      : Locale(getIt<SharedPreferences>().getString("locale")!),
+                      : Locale(getIt<SharedPreferences>().getString('locale')!),
                   title: 'template',
+                  restorationScopeId: 'app',
                   debugShowCheckedModeBanner: false,
                   themeMode: getIt<AppThemeCubit>().themeMode,
                   theme: AppThemes.lightTheme,
@@ -65,4 +67,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
