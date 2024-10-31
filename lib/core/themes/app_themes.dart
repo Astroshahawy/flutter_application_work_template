@@ -30,7 +30,7 @@ class AppThemes {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       },
     ),
-    scaffoldBackgroundColor: AppDarkColors.backgroundColor,
+    scaffoldBackgroundColor: AppDarkColors.black,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppDarkColors.black,
     ),

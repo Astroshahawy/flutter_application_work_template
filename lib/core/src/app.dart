@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
                   create: (context) => getIt<InternetCubit>()),
               BlocProvider<LocalizationBloc>(
                   create: (context) => getIt<LocalizationBloc>()..setDefaultLanguage()),
-              BlocProvider<AppThemeCubit>(
-                  create: (context) => getIt<AppThemeCubit>()),
+              // BlocProvider<AppThemeCubit>(
+              //     create: (context) => getIt<AppThemeCubit>()),
             ],
             child: BlocBuilder<LocalizationBloc, LocalizationState>(
               buildWhen: (previous, current) => previous != current,
@@ -53,9 +53,9 @@ class MyApp extends StatelessWidget {
                   title: 'template',
                   restorationScopeId: 'app',
                   debugShowCheckedModeBanner: false,
-                  themeMode: getIt<AppThemeCubit>().themeMode,
+                  // themeMode: getIt<AppThemeCubit>().themeMode,
                   theme: AppThemes.lightTheme,
-                  darkTheme: AppThemes.darkTheme,
+                  // darkTheme: AppThemes.darkTheme,
                   initialRoute: AppRoutes.initScreen,
                   onGenerateRoute: AppRouter.generateRoutes,
                 );

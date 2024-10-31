@@ -8,9 +8,9 @@ final getIt = GetIt.instance;
 
 Future<void> initGetIt() async {
   ///Essentials
-  getIt.registerFactory<LocalizationBloc>(() => LocalizationBloc());
+  // getIt.registerFactory<AppThemeCubit>(() => AppThemeCubit());
   getIt.registerFactory<InternetCubit>(() => InternetCubit());
-  getIt.registerFactory<AppThemeCubit>(() => AppThemeCubit());
+  getIt.registerFactory<LocalizationBloc>(() => LocalizationBloc());
 
   /// Feature
   getIt.registerLazySingleton<FeatureDataSource>(
