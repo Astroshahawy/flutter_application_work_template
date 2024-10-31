@@ -81,7 +81,7 @@ class DioHelper extends BaseDioHelper {
   }
 
   static void setTokenAfterLogin(String token) async {
-    await getIt<FlutterSecureStorage>().write(
+    SharedPreferencesHelper.setSecuredString(
       key: 'token',
       value: token,
     );

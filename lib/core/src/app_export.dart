@@ -21,6 +21,7 @@ export '../constants/string_constants.dart';
 export '../exceptions/error_handler.dart';
 export '../helpers/app_bloc_observer.dart';
 export '../helpers/extensions.dart';
+export '../helpers/shared_preferences_helper.dart';
 export '../injection/injector.dart';
 export '../localization/app_localization.dart';
 export '../localization/cubit/localization_cubit.dart';

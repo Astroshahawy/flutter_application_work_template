@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'core/exceptions/error_logger.dart';
-import 'core/helpers/cache_helper.dart';
 import 'core/src/app.dart';
 import 'core/src/app_export.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheHelper.init();
   initGetIt();
+  SharedPreferencesHelper.init();
   Bloc.observer = AppBlocObserver();
 
   Future.wait([
