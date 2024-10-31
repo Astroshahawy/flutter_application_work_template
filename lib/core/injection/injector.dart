@@ -6,7 +6,7 @@ import '../src/app_export.dart';
 
 final getIt = GetIt.instance;
 
-void initGetIt() async {
+Future<void> initGetIt() async {
   ///Essentials
   getIt.registerFactory<LocalizationBloc>(() => LocalizationBloc());
   getIt.registerFactory<InternetCubit>(() => InternetCubit());

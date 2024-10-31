@@ -5,36 +5,34 @@ import 'core/src/app.dart';
 import 'core/src/app_export.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  initGetIt();
-  SharedPreferencesHelper.init();
-  Bloc.observer = AppBlocObserver();
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await initGetIt();
+      SharedPreferencesHelper.init();
+      Bloc.observer = AppBlocObserver();
 
-  Future.wait([
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]),
-  ]).then((value) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness:
-            Platform.isIOS ? Brightness.light : Brightness.dark,
-      ),
-    );
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
 
-    FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterError.dumpErrorToConsole(details);
-      logFlutterErrors(details);
-    };
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              Platform.isIOS ? Brightness.light : Brightness.dark,
+        ),
+      );
 
-    runZonedGuarded(
-      () {
-        runApp(const MyApp());
-      },
-      (error, stack) {
-        logDartErrors(error, stack);
-      },
-    );
-  });
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FlutterError.dumpErrorToConsole(details);
+        logFlutterErrors(details);
+      };
+
+      runApp(const MyApp());
+    },
+    (error, stack) {
+      logDartErrors(error, stack);
+    },
+  );
 }
