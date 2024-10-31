@@ -74,12 +74,17 @@ class DioHelper extends BaseDioHelper {
     );
 
     dio.interceptors.add(
-      AwesomeDioInterceptor(
-        logResponseHeaders: false,
-      ),
+      AwesomeDioInterceptor(),
     );
 
     return dio;
+  }
+
+  static void setTokenAfterLogin(String token) async {
+    await getIt<FlutterSecureStorage>().write(
+      key: 'token',
+      value: token,
+    );
   }
 
   @override

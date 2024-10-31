@@ -14,7 +14,7 @@ class FeatureRepository {
         User.fromJson(await _featureDataSource.getData(id)),
       );
     } catch (error) {
-      return NetworkService.failure(ErrorHandler.handle(error));
+      return NetworkService.failure(ApiErrorHandler.handle(error));
     }
   }
 }

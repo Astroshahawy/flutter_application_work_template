@@ -1,3 +1,4 @@
+import '../../../core/exceptions/error_model.dart';
 import '../../../core/src/app_export.dart';
 import '../data/models/user.dart';
 import '../data/repository/feature_repository.dart';
@@ -25,11 +26,11 @@ class FeatureCubit extends Cubit<FeatureState> {
           ),
         );
 
-      case Failure<User>(errorHandler: ErrorHandler errorHandler):
+      case Failure<User>(errorModel: ApiErrorModel errorModel):
         emit(
           FeatureState(
             status: FeatureStatus.error,
-            errorMessage: errorHandler.apiErrorModel.message,
+            errorModel: errorModel,
           ),
         );
     }

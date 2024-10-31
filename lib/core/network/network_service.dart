@@ -1,9 +1,9 @@
-import '../src/app_export.dart';
+import '../exceptions/error_model.dart';
 
 sealed class NetworkService<T> {
   const NetworkService();
   factory NetworkService.succeed(T data) = Success<T>;
-  factory NetworkService.failure(ErrorHandler errorHandler) = Failure<T>;
+  factory NetworkService.failure(ApiErrorModel errorModel) = Failure<T>;
 }
 
 class Success<T> extends NetworkService<T> {
@@ -12,6 +12,6 @@ class Success<T> extends NetworkService<T> {
 }
 
 class Failure<T> extends NetworkService<T> {
-  final ErrorHandler errorHandler;
-  const Failure(this.errorHandler);
+  final ApiErrorModel errorModel;
+  const Failure(this.errorModel);
 }

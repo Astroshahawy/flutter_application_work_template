@@ -10,12 +10,12 @@ enum FeatureStatus {
 class FeatureState {
   final FeatureStatus status;
   final User? user;
-  final String? errorMessage;
+  final ApiErrorModel? errorModel;
 
   FeatureState({
     required this.status,
     this.user,
-    this.errorMessage,
+    this.errorModel,
   });
 }
 

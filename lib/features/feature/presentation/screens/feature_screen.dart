@@ -67,7 +67,7 @@ class FeatureScreen extends StatelessWidget {
             } else if (state.isError) {
               return Center(
                 child: Text(
-                  state.errorMessage!,
+                  state.errorModel!.getAllErrorMessages(),
                 ),
               );
             } else {
