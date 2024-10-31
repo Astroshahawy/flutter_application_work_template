@@ -8,10 +8,9 @@ part 'internet_state.dart';
 class InternetCubit extends Cubit<InternetState> {
   late StreamSubscription<List<ConnectivityResult>> _subscription;
 
-  InternetCubit() : super(InternetInitial()) {
+  InternetCubit() : super(InternetState(status: InternetStatus.initial)) {
     _subscription =
         Connectivity().onConnectivityChanged.listen(_handleConnectivityChange);
-    checkConnection();
   }
 
   void _handleConnectivityChange(List<ConnectivityResult> result) {
@@ -23,16 +22,18 @@ class InternetCubit extends Cubit<InternetState> {
     }
   }
 
-  void checkConnection() {
-    Connectivity().checkConnectivity().then(_handleConnectivityChange);
-  }
-
   void connected() {
-    emit(ConnectedState(message: 'Connected'));
+    emit(InternetState(
+      status: InternetStatus.connected,
+      message: 'Connected',
+    ));
   }
 
   void notConnected() {
-    emit(NotConnectedState(message: 'Not Connected'));
+    emit(InternetState(
+      status: InternetStatus.notConnected,
+      message: 'Not Connected',
+    ));
   }
 
   @override

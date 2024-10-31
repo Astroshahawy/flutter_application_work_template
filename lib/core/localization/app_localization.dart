@@ -10,8 +10,8 @@ class AppLocalization {
   Locale locale;
 
   static final Map<String, Map<String, String>> _localizedValues = {
-    'ar': arEg,
     'en': enUs,
+    'ar': arEg,
   };
 
   static AppLocalization of(BuildContext context) {
@@ -19,8 +19,8 @@ class AppLocalization {
   }
 
   static const List<Locale> supportedLocales = [
-    Locale('ar'),
     Locale('en'),
+    Locale('ar'),
   ];
 
   static List<String> languages() => _localizedValues.keys.toList();
@@ -48,4 +48,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
 extension LocalizationExtension on String {
   String tr(BuildContext context) =>
       AppLocalization.of(context).getString(this);
+}
+
+extension TextTranslateExtension on Text {
+  Text tr(BuildContext context) => Text(data?.tr(context) ?? '');
 }

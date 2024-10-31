@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'core/exceptions/error_logger.dart';
 import 'core/helpers/cache_helper.dart';
 import 'core/src/app.dart';
 import 'core/src/app_export.dart';
@@ -20,6 +23,19 @@ Future<void> main() async {
             Platform.isIOS ? Brightness.light : Brightness.dark,
       ),
     );
-    runApp(const MyApp());
+
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.dumpErrorToConsole(details);
+      logFlutterErrors(details);
+    };
+
+    runZonedGuarded(
+      () {
+        runApp(const MyApp());
+      },
+      (error, stack) {
+        logDartErrors(error, stack);
+      },
+    );
   });
 }

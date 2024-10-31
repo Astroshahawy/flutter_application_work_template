@@ -7,26 +7,22 @@ class AppThemeCubit extends Cubit<AppThemeState> {
 
   static AppThemeCubit get(context) => BlocProvider.of<AppThemeCubit>(context);
 
-  Future<SharedPreferences> getPreferences() async {
-    return await SharedPreferences.getInstance();
-  }
+  final preferences = getIt<SharedPreferences>();
 
   ThemeMode _themeMode = ThemeMode.system;
 
   ThemeMode get themeMode => _themeMode;
 
-  Future<void> setAppTheme() async {
-    final preferences = await getPreferences();
+  void setAppTheme() {
     preferences.setBool('AppTheme', isDarkMode);
   }
 
-  Future<bool?> fetchAppTheme() async {
-    final preferences = await getPreferences();
+  bool? fetchAppTheme() {
     return preferences.getBool('AppTheme');
   }
 
-  Future<void> applyAppTheme() async {
-    final isDarkModeFetched = await fetchAppTheme();
+  void applyAppTheme() {
+    final isDarkModeFetched = fetchAppTheme();
     isDarkModeFetched == null
         ? setInitialThemeMode()
         : _themeMode = isDarkModeFetched ? ThemeMode.dark : ThemeMode.light;

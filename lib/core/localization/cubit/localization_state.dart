@@ -1,14 +1,21 @@
 part of 'localization_cubit.dart';
 
-abstract class LocalizationState {
+enum LocalizationStatus {
+  initial,
+  changed,
+}
+
+class LocalizationState {
+  final LocalizationStatus status;
   final Locale locale;
-  LocalizationState(this.locale);
+
+  LocalizationState({
+    required this.status,
+    required this.locale,
+  });
 }
 
-class LocalizationInit extends LocalizationState {
-  LocalizationInit() : super(AppLocalization.supportedLocales.first);
-}
-
-class LocalizationChange extends LocalizationState {
-  LocalizationChange(super.locale);
+extension LocalizationStatusEx on LocalizationState {
+  bool get isInitial => status == LocalizationStatus.initial;
+  bool get isChanged => status == LocalizationStatus.changed;
 }

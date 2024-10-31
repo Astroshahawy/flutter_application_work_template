@@ -1,17 +1,23 @@
 part of 'internet_cubit.dart';
 
-abstract class InternetState {}
-
-class InternetInitial extends InternetState {}
-
-class ConnectedState extends InternetState {
-  final String message;
-
-  ConnectedState({required this.message});
+enum InternetStatus {
+  initial,
+  connected,
+  notConnected,
 }
 
-class NotConnectedState extends InternetState {
-  final String message;
+class InternetState {
+  final InternetStatus status;
+  final String? message;
 
-  NotConnectedState({required this.message});
+  InternetState({
+    required this.status,
+    this.message,
+  });
+}
+
+extension InternetStatusEx on InternetState {
+  bool get isInitial => status == InternetStatus.initial;
+  bool get isConnected => status == InternetStatus.connected;
+  bool get isNotConnected => status == InternetStatus.notConnected;
 }
